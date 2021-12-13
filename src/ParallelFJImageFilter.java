@@ -1,34 +1,34 @@
 import java.util.concurrent.RecursiveAction;
 
 public class ParallelFJImageFilter extends RecursiveAction {
-    private int[] src;
-    private int[] dst;
-    private int width;
-    private int start;
-    private int end;
+    private final int[] src;
+    private final int[] dst;
+    private final int width;
+    private final int start;
+    private final int end;
 
-    private final int THRESHOLD = 5;
+    private final int threshold;
 
-    public ParallelFJImageFilter(int[] src, int[] dst, int width, int start, int end) {
+    public ParallelFJImageFilter(int[] src, int[] dst, int width, int start, int end, int threshold) {
         this.src = src;
         this.dst = dst;
         this.width = width;
         this.start = start;
         this.end = end;
+        this.threshold = threshold;
     }
 
     @Override
     protected void compute() {
-        if (start - end < THRESHOLD) {
+        if (start - end < threshold) {
             apply();
             return;
         }
 
-        double preciseMiddle = (start + end) / 2.0;
-        int middle = (int) Math.round(preciseMiddle / 10.0) * 10;
+        int middle = (start + end) / 2;
 
-        invokeAll(new ParallelFJImageFilter(src, dst, width, start, middle),
-                new ParallelFJImageFilter(src, dst, width, middle, end));
+        invokeAll(new ParallelFJImageFilter(src, dst, width, start, middle, threshold),
+                new ParallelFJImageFilter(src, dst, width, middle, end, threshold));
     }
 
     public void apply() {
