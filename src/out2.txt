@@ -1,0 +1,173 @@
+Source image: IMAGE2.jpg
+Image size is 7952x5304
+
+Starting sequential image filter.
+Sequential image filter took 117801 milliseconds.
+Output image: FilteredIMAGE2.jpg
+
+Available processors: 4
+
+Threshold: 3
+
+Starting parallel image filter using 1 threads.
+Parallel image filter took 131697 milliseconds using 1 threads.
+Number of generated tasks 650700.
+Output image verified successfully!
+Speedup: 0.89448506 ok (>= 0.7)
+
+Starting parallel image filter using 2 threads.
+Parallel image filter took 69680 milliseconds using 2 threads.
+Number of generated tasks 1301371.
+Output image verified successfully!
+Speedup: 1.6905999 ok (>= 1.4)
+
+Starting parallel image filter using 4 threads.
+Parallel image filter took 40390 milliseconds using 4 threads.
+Number of generated tasks 1951612.
+Output image verified successfully!
+Speedup: 2.9165883 ok (>= 2.8)
+
+Starting parallel image filter using 8 threads.
+Parallel image filter took 36917 milliseconds using 8 threads.
+Number of generated tasks 2601176.
+Output image verified successfully!
+Speedup: 3.190969 not ok (>= 5.6)
+
+Starting parallel image filter using 16 threads.
+Parallel image filter took 37025 milliseconds using 16 threads.
+Number of generated tasks 3249697.
+Output image for parallel filter: FilteredIMAGE2.jpg
+Output image verified successfully!
+Speedup: 3.1816611
+
+Threshold: 4
+
+Starting parallel image filter using 1 threads.
+Parallel image filter took 134463 milliseconds using 1 threads.
+Number of generated tasks 3659197.
+Output image verified successfully!
+Speedup: 0.87608486 ok (>= 0.7)
+
+Starting parallel image filter using 2 threads.
+Parallel image filter took 68472 milliseconds using 2 threads.
+Number of generated tasks 4068662.
+Output image verified successfully!
+Speedup: 1.7204258 ok (>= 1.4)
+
+Starting parallel image filter using 4 threads.
+Parallel image filter took 42046 milliseconds using 4 threads.
+Number of generated tasks 4477947.
+Output image verified successfully!
+Speedup: 2.8017173 ok (>= 2.8)
+
+Starting parallel image filter using 8 threads.
+Parallel image filter took 37775 milliseconds using 8 threads.
+Number of generated tasks 4886510.
+Output image verified successfully!
+Speedup: 3.1184912 not ok (>= 5.6)
+
+Starting parallel image filter using 16 threads.
+Parallel image filter took 37900 milliseconds using 16 threads.
+Number of generated tasks 5293937.
+Output image for parallel filter: FilteredIMAGE2.jpg
+Output image verified successfully!
+Speedup: 3.1082058
+
+Threshold: 5
+
+Starting parallel image filter using 1 threads.
+Parallel image filter took 131711 milliseconds using 1 threads.
+Number of generated tasks 5703437.
+Output image verified successfully!
+Speedup: 0.89439 ok (>= 0.7)
+
+Starting parallel image filter using 2 threads.
+Parallel image filter took 68722 milliseconds using 2 threads.
+Number of generated tasks 6112885.
+Output image verified successfully!
+Speedup: 1.7141672 ok (>= 1.4)
+
+Starting parallel image filter using 4 threads.
+Parallel image filter took 42369 milliseconds using 4 threads.
+Number of generated tasks 6522094.
+Output image verified successfully!
+Speedup: 2.7803583 not ok (>= 2.8)
+
+Starting parallel image filter using 8 threads.
+Parallel image filter took 38666 milliseconds using 8 threads.
+Number of generated tasks 6930436.
+Output image verified successfully!
+Speedup: 3.0466301 not ok (>= 5.6)
+
+Starting parallel image filter using 16 threads.
+Parallel image filter took 38852 milliseconds using 16 threads.
+Number of generated tasks 7337270.
+Output image for parallel filter: FilteredIMAGE2.jpg
+Output image verified successfully!
+Speedup: 3.0320446
+
+Threshold: 6
+
+Starting parallel image filter using 1 threads.
+Parallel image filter took 132485 milliseconds using 1 threads.
+Number of generated tasks 7578370.
+Output image verified successfully!
+Speedup: 0.8891648 ok (>= 0.7)
+
+Starting parallel image filter using 2 threads.
+Parallel image filter took 68800 milliseconds using 2 threads.
+Number of generated tasks 7819431.
+Output image verified successfully!
+Speedup: 1.7122239 ok (>= 1.4)
+
+Starting parallel image filter using 4 threads.
+Parallel image filter took 42664 milliseconds using 4 threads.
+Number of generated tasks 8060463.
+Output image verified successfully!
+Speedup: 2.7611334 not ok (>= 2.8)
+
+Starting parallel image filter using 8 threads.
+Parallel image filter took 39603 milliseconds using 8 threads.
+Number of generated tasks 8300890.
+Output image verified successfully!
+Speedup: 2.9745474 not ok (>= 5.6)
+
+Starting parallel image filter using 16 threads.
+Parallel image filter took 39368 milliseconds using 16 threads.
+Number of generated tasks 8540922.
+Output image for parallel filter: FilteredIMAGE2.jpg
+Output image verified successfully!
+Speedup: 2.9923034
+
+Threshold: 7
+
+Starting parallel image filter using 1 threads.
+Parallel image filter took 132661 milliseconds using 1 threads.
+Number of generated tasks 8745622.
+Output image verified successfully!
+Speedup: 0.88798517 ok (>= 0.7)
+
+Starting parallel image filter using 2 threads.
+Parallel image filter took 69377 milliseconds using 2 threads.
+Number of generated tasks 8950297.
+Output image verified successfully!
+Speedup: 1.6979835 ok (>= 1.4)
+
+Starting parallel image filter using 4 threads.
+Parallel image filter took 43980 milliseconds using 4 threads.
+Number of generated tasks 9154888.
+Output image verified successfully!
+Speedup: 2.678513 not ok (>= 2.8)
+
+Starting parallel image filter using 8 threads.
+Parallel image filter took 40353 milliseconds using 8 threads.
+Number of generated tasks 9359059.
+Output image verified successfully!
+Speedup: 2.9192624 not ok (>= 5.6)
+
+Starting parallel image filter using 16 threads.
+Parallel image filter took 39039 milliseconds using 16 threads.
+Number of generated tasks 9562413.
+Output image for parallel filter: FilteredIMAGE2.jpg
+Output image verified successfully!
+Speedup: 3.017521
