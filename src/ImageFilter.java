@@ -1,6 +1,6 @@
 /**
  * Iterative nine-point image convolution filter working on linearized image. 
- * In each of the STEPS iteration steps, the average RGB-value of each pixel
+ * In each of the NRSTEPS iteration steps, the average RGB-value of each pixel
  * in the source array is computed taking into account the pixel and its 8 neighbor 
  * pixels (in 2D) and written to the destination array.
  */
@@ -10,6 +10,8 @@ public class ImageFilter {
 	private final int width;
 	private final int height;
 
+	private final int NRSTEPS = 100;
+
 	public ImageFilter(int[] src, int[] dst, int w, int h) {
 		this.src = src;
 		this.dst = dst;
@@ -18,9 +20,8 @@ public class ImageFilter {
 	}
 
 	public void apply() {
-		final int STEPS = 100;
 		int index, pixel;
-		for (int steps = 0; steps < STEPS; steps++) {
+		for (int steps = 0; steps < NRSTEPS; steps++) {
 			for (int i = 1; i < height - 1; i++) {
 				for (int j = 1; j < width - 1; j++) {
 					float rt = 0, gt = 0, bt = 0;
