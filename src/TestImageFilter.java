@@ -11,7 +11,6 @@ public class TestImageFilter {
     private static final int STEPS = 100;
     private static final int[] threadsToUse = { 1, 2, 4, 8, 16 };
     private static final float[] speedUpValues = { 0.7f, 1.4f, 2.8f, 5.6f, -1f };
-    private static final int[] thresholds = { 200, 400, 600, 800 };
     private static String srcFileName = null;
     private static long timeOfSequentialExecution;
     private static long timeOfParallelExecution;
@@ -46,21 +45,21 @@ public class TestImageFilter {
         // availableProcessor returns number of logic processor so divide by 2 to get number of physical processors
         System.out.println("\nAvailable processors: " + Runtime.getRuntime().availableProcessors() / 2);
 
-        for (int threshold: thresholds) {
+//        for (int threshold: thresholds) {
             for (int t = 0; t < threadsToUse.length; t++) {
                 int[] srcParallel = image.getRGB(0, 0, width, height, null, 0, width);
                 int[] dstParallel = new int[srcParallel.length];
 
-                execParallelFilter(srcParallel, dstParallel, width, height, threadsToUse[t], threshold);
+                execParallelFilter(srcParallel, dstParallel, width, height, threadsToUse[t]);
 
                 checkSolution(srcSequential, srcParallel);
-                showSpeedUp(speedUpValues[t]);
+                checkSpeedUp(speedUpValues[t]);
             }
         }
-    }
+//    }
 
 
-    private static void showSpeedUp(float speedToCheck) {
+    private static void checkSpeedUp(float speedToCheck) {
         float speedUp = (float) timeOfSequentialExecution / timeOfParallelExecution;
 
         if (speedToCheck > 0f) {
@@ -102,14 +101,14 @@ public class TestImageFilter {
         System.out.println("Output image: " + dstName);
     }
 
-    private static void execParallelFilter(int[] src, int[] dst, final int width, final int height, final int numberOfThreads, final int threshold) throws IOException {
+    private static void execParallelFilter(int[] src, int[] dst, final int width, final int height, final int numberOfThreads) throws IOException {
         System.out.println("\nStarting parallel image filter using " + numberOfThreads + " threads.");
 
         ForkJoinPool pool = new ForkJoinPool(numberOfThreads);
         ParallelFJImageFilter filter;
         long startTime = System.currentTimeMillis();
         for (int steps = 0; steps < STEPS; steps++) {
-            filter = new ParallelFJImageFilter(src, dst, width, 1, height - 1, threshold);
+            filter = new ParallelFJImageFilter(src, dst, width, 1, height - 1);
             pool.invoke(filter);
 
             // swap references
