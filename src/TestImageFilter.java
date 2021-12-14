@@ -61,6 +61,7 @@ public class TestImageFilter {
                     System.out.println("The parallel filter isn't working as expected.");
                     System.exit(-1);
                 }
+                ParallelFJImageFilter.numberOfTasks = 0;
             }
         }
 
