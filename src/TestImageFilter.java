@@ -10,6 +10,7 @@ public class TestImageFilter {
 
     private static final int STEPS = 100;
     private static final int[] threadsToUse = { 1, 2, 4, 8, 16 };
+    private static final int[] thresholds = { 3, 4, 5, 6, 7 };
     private static final float[] speedUpValues = { 0.7f, 1.4f, 2.8f, 5.6f, -1f };
     private static String srcFileName = null;
     private static long timeOfSequentialExecution;
@@ -45,18 +46,20 @@ public class TestImageFilter {
         // availableProcessor returns number of logic processor so divide by 2 to get number of physical processors
         System.out.println("\nAvailable processors: " + Runtime.getRuntime().availableProcessors() / 2);
 
-//        for (int threshold: thresholds) {
+        for (int threshold: thresholds) {
+            System.out.println("\nThreshold: "+ threshold);
             for (int t = 0; t < threadsToUse.length; t++) {
                 int[] srcParallel = image.getRGB(0, 0, width, height, null, 0, width);
                 int[] dstParallel = new int[srcParallel.length];
 
-                execParallelFilter(srcParallel, dstParallel, width, height, threadsToUse[t]);
+                execParallelFilter(srcParallel, dstParallel, width, height, threadsToUse[t], threshold);
 
-                checkSolution(srcSequential, srcParallel);
-                checkSpeedUp(speedUpValues[t]);
+                if (checkSolution(srcSequential, srcParallel)) {
+                    checkSpeedUp(speedUpValues[t]);
+                }
             }
         }
-//    }
+    }
 
 
     private static void checkSpeedUp(float speedToCheck) {
@@ -69,14 +72,15 @@ public class TestImageFilter {
         }
     }
 
-    private static void checkSolution(int[] source, int[] destination) {
+    private static boolean checkSolution(int[] source, int[] destination) {
         for (int i = 0; i < source.length; i++) {
             if (source[i] != destination[i]) {
                 System.out.println("Output image verified failed!");
-                return;
+                return false;
             }
         }
         System.out.println("Output image verified successfully!");
+        return true;
     }
 
     private static void execSequentialFilter(int[] src, int[] dst, final int w, final int h) throws IOException {
@@ -95,20 +99,20 @@ public class TestImageFilter {
         dstImage.setRGB(0, 0, w, h, dst, 0, w);
 
         String dstName = "Filtered" + srcFileName;
-        File dstFile = new File("src/SequentialFilteredImages/" + dstName);
+        File dstFile = new File("SequentialFilteredImages/" + dstName);
         ImageIO.write(dstImage, "jpg", dstFile);
 
         System.out.println("Output image: " + dstName);
     }
 
-    private static void execParallelFilter(int[] src, int[] dst, final int width, final int height, final int numberOfThreads) throws IOException {
+    private static void execParallelFilter(int[] src, int[] dst, final int width, final int height, final int numberOfThreads, final int threshold) throws IOException {
         System.out.println("\nStarting parallel image filter using " + numberOfThreads + " threads.");
 
         ForkJoinPool pool = new ForkJoinPool(numberOfThreads);
         ParallelFJImageFilter filter;
         long startTime = System.currentTimeMillis();
         for (int steps = 0; steps < STEPS; steps++) {
-            filter = new ParallelFJImageFilter(src, dst, width, 1, height - 1);
+            filter = new ParallelFJImageFilter(src, dst, width, 1, height - 1, threshold);
             pool.invoke(filter);
 
             // swap references
@@ -124,12 +128,14 @@ public class TestImageFilter {
         System.out.println("Parallel image filter took " + tParallel + " milliseconds using " + numberOfThreads + " threads.");
         timeOfParallelExecution = tParallel;
 
+        System.out.println("Number of generated tasks " + ParallelFJImageFilter.numberOfTasks + ".");
+
         if (numberOfThreads == 16) {
             BufferedImage dstImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
             dstImage.setRGB(0, 0, width, height, dst, 0, width);
 
             String dstName = "Filtered" + srcFileName;
-            File dstFile = new File("src/ParallelFilteredImages/" + dstName);
+            File dstFile = new File("ParallelFilteredImages/" + dstName);
             ImageIO.write(dstImage, "jpg", dstFile);
 
             // Print in the end
